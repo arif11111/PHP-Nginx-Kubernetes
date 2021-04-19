@@ -93,12 +93,8 @@ $ kubectl apply -f postgresql-service.yaml
 ```
 We can verify the conncetivity using the following commands: </br>
 ```
-$ kubectl run -i --tty --rm debug --image=busybox:1.28.0 --restart=Never -- nslookup postgresql-service.default
-  Server:    10.100.0.10
-  Address 1: 10.100.0.10 kube-dns.kube-system.svc.cluster.local
-
-  Name:      postgresql-service.default
-  Address 1: 172.16.94.248 ip-172-16-94-248.us-west-2.compute.internal
+$ kubectl run postgresql-client -it --rm --restart='Never' --image bitnami/postgresql --env="PGPASSWORD=postgres" --command -- psql --host my-cluster.cijsdqmilarx.us-west-2.rds.amazonaws.com -U postgres -p 5432
+  
 ```
 
 
@@ -122,7 +118,7 @@ Execute the following commands to install the ALB ingress controller. </br>
 `$ helm install aws-load-balancer-controller eks/aws-load-balancer-controller --set clusterName=my-cluster -n kube-system'` </br>
 
 Create an ingess manifest for our load balancer using the following command: </br>
-`$ kubectl apply -f ingress.yaml` </br>
+`$ kubectl apply -f nginx-php-kubernetes.yaml </br>
 ```
 Name:             nginx-php-kubernetes
 Namespace:        default
