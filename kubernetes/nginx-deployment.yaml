@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-deployment
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-php
+  template:
+    metadata:
+      labels:
+        app: nginx-php
+    spec:
+      volumes:
+        # Create the shared files volume to be used in both pods
+        - name: shared-files
+          emptyDir: {}   	  
+        # Add the ConfigMap we declared above as a volume for the pod
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-config
+
+      containers:
+
+      # after the container has started,we need to copy the PHP files from this
+      # container's local filesystem (/app -- added via the Docker image) 
+      # to the shared volume, which is mounted at /var/www/html.
+      - image: a5edevopstuts/my-php-app:2.0.0
+        name: my-php-app
+        volumeMounts:
+          - name: shared-files
+            mountPath: /var/www/html
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "cp -r /app/. /var/www/html"]
+
+      - image: nginx:1.7.9
+        name: nginx
+        volumeMounts:
+          - name: shared-files
+            mountPath: /var/www/html
+          - name: nginx-config-volume
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf

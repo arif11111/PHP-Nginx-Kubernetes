@@ -1,0 +1,99 @@
+###################CLUSTER VARIABLES##################
+variable region {
+  default = "us-west-2"
+}
+
+variable aws_access_key_id {}
+
+variable aws_secret_access_key {}
+
+variable vpc_subnet {
+  default = "172.16.0.0/16"
+}
+
+variable azs {
+  type    = "list"
+  default = ["us-west-2a", "us-west-2b"]
+}
+
+variable public_subnets {
+  type    = "list"
+  default = ["172.16.0.0/20", "172.16.16.0/20"]
+}
+
+variable private_subnets {
+  type    = "list"
+  default = ["172.16.32.0/20", "172.16.48.0/20"]
+}
+
+variable database_subnets {
+  type = "list"
+  default = ["172.16.64.0/20", "172.16.82.0/20"]
+}
+
+variable tags {
+  type = "map"
+
+  default = {
+    "Environment" = "Development"
+  }
+}
+
+variable name {
+default = "Test-VPC"
+}
+
+variable worker_groups {
+  type = "list"
+
+  default = [{
+    "instance_type"        = "t2.micro"
+    "asg_desired_capacity" = "3"
+    "asg_min_size"         = "1"
+    "asg_max_size"         = "3"
+  }]
+}
+
+###################RDS VARIABLES##################
+variable "rds_name" {
+  default = "dev"
+}
+
+variable "rds_port" {
+  default = "5432"
+}
+
+variable "rds_storage_type" {
+  default = "gp2"
+}
+
+variable "rds_allocated_storage" {
+  default = "50"
+}
+
+variable "rds_engine" {
+  default = "postgres"
+}
+
+variable "rds_engine_version" {
+  default = "12.5"
+}
+
+variable "rds_instance_class" {
+  default = "db.t2.micro"
+}
+
+variable "rds_username" {
+  default = "postgres"
+}
+
+variable "rds_password" {
+  default = "postgres"
+}
+
+variable "rds_parameter_group_family" {
+  default = "postgres12"
+}
+
+
+
