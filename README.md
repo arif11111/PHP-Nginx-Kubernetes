@@ -136,7 +136,26 @@ Rules:
 ```
 
 We can access our webserver through the endpoint generated: </br>
-`$ curl k8s-default-nginxphp-11a7134498-183686945.us-west-2.elb.amazonaws.com` </br>
+```
+$ curl k8s-default-nginxphp-11a7134498-183686945.us-west-2.elb.amazonaws.com
+  <!DOCTYPE html>
+<html>
+  <head>
+    <title>My Static Website</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <p>
+      Up and Available!!
+    </p>
+  </body>
+</html>
+```
+You can connect through the browser using the endpoint - </br>
+`http://k8s-default-nginxphp-11a7134498-183686945.us-west-2.elb.amazonaws.com`
+
+
+
 
 
 
