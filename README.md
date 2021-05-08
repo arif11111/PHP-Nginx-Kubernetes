@@ -8,7 +8,7 @@ As you can see in the diagram, the infrastructure consists of 3 web servers runn
 
 **Clone the below terraform repository**
 ```
-$ git clone https://github.com/SubhakarKotta/aws-eks-rds-terraform.git
+$ git clone https://github.com/arif11111/PHP-Nginx-Kubernetes.git
 $ cd PHP-Nginx-Kubernetes/terraform
 ```
 
